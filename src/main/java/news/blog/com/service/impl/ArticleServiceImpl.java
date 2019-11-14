@@ -1,16 +1,21 @@
 package news.blog.com.service.impl;
 
-import news.blog.com.model.ArticleEntity;
-import news.blog.com.repository.ArticleRepository;
-import news.blog.com.service.ArticleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
+import news.blog.com.model.ArticleEntity;
+import news.blog.com.model.dto.ArticleDto;
+import news.blog.com.service.ArticleService;
+import news.blog.com.repository.ArticleRepository;
+
+import com.tabasoft.converter.api.ExtendedConversionService;
+
 @Service
+@RequiredArgsConstructor
 public class ArticleServiceImpl implements ArticleService
 {
-    @Autowired
-    private ArticleRepository articleRepository;
+    private final ArticleRepository articleRepository;
+    private final ExtendedConversionService conversionService;
 
     @Override
     public Iterable<ArticleEntity> getArticles()
@@ -19,14 +24,21 @@ public class ArticleServiceImpl implements ArticleService
     }
 
     @Override
-    public ArticleEntity getArticle(Long id)
+    public ArticleDto getArticleDto(Long id)
     {
-            return articleRepository.findById(id).get();
+        return conversionService.convert(articleRepository.findById(id).orElseThrow(()-> new RuntimeException("Article not found " + id)), ArticleDto.class);
     }
 
     @Override
-    public void saveArticle(String tags, String title, String imageName, String fullDescription, String shortDescription)
+    public void saveArticle(ArticleDto articleDto)
     {
-        articleRepository.save(new ArticleEntity(tags, title, imageName, fullDescription, shortDescription));
+        articleRepository.save(ArticleEntity.builder()
+                                            .tags(articleDto.getTags())
+                                            .title(articleDto.getTitle())
+                                            .imageName(articleDto.getImageName())
+                                            .fullDescription(articleDto.getFullDescription())
+                                            .shortDescription(articleDto.getShortDescription())
+                                            .build()
+        );
     }
 }

@@ -1,12 +1,13 @@
 package news.blog.com.service;
 
 import news.blog.com.model.ArticleEntity;
+import news.blog.com.model.dto.ArticleDto;
 
 public interface ArticleService
 {
     Iterable<ArticleEntity> getArticles();
 
-    ArticleEntity getArticle(Long id);
+    ArticleDto getArticleDto(Long id);
 
-    void saveArticle(String tags, String title, String imageName, String fullDescription, String shortDescription);
+    void saveArticle(ArticleDto articleDto);
 }
