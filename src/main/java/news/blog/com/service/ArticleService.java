@@ -5,9 +5,9 @@ import news.blog.com.model.dto.ArticleDto;
 
 public interface ArticleService
 {
-    Iterable<ArticleEntity> getArticles();
+    Iterable<ArticleDto> getArticles();
 
-    ArticleDto getArticleDto(Long id);
+    ArticleDto getArticle(Long id);
 
     void saveArticle(ArticleDto articleDto);
 }

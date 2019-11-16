@@ -10,6 +10,8 @@ import news.blog.com.repository.ArticleRepository;
 
 import com.tabasoft.converter.api.ExtendedConversionService;
 
+import java.util.Collection;
+
 @Service
 @RequiredArgsConstructor
 public class ArticleServiceImpl implements ArticleService
@@ -18,13 +20,13 @@ public class ArticleServiceImpl implements ArticleService
     private final ExtendedConversionService conversionService;
 
     @Override
-    public Iterable<ArticleEntity> getArticles()
+    public Collection<ArticleDto> getArticles()
     {
-        return articleRepository.findAll();
+        return conversionService.convertMany((Collection) articleRepository.findAll(), ArticleDto.class);
     }
 
     @Override
-    public ArticleDto getArticleDto(Long id)
+    public ArticleDto getArticle(Long id)
     {
         return conversionService.convert(articleRepository.findById(id).orElseThrow(()-> new RuntimeException("Article not found " + id)), ArticleDto.class);
     }
