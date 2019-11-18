@@ -37,7 +37,7 @@ public class ArticleController
     }
 
     @PostMapping("/add_article")
-    public String saveArticle(ArticleDto articleDto)
+    public String saveArticle(@RequestBody ArticleDto articleDto)
     {
         articleService.saveArticle(articleDto);
         return "redirect:/";
