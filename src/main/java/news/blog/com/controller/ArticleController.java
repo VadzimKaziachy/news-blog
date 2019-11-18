@@ -2,12 +2,16 @@ package news.blog.com.controller;
 
 import lombok.RequiredArgsConstructor;
 
-import news.blog.com.model.dto.ArticleDto;
+import news.blog.com.service.dto.ArticleDto;
 import news.blog.com.service.impl.ArticleServiceImpl;
 
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
+
+import java.util.Collection;
+
+import static news.blog.com.util.Constants.SAVE_ARTICLE;
 
 @Controller
 @RequestMapping("/")
@@ -17,29 +21,21 @@ public class ArticleController
     private final ArticleServiceImpl articleService;
 
     @GetMapping
-    public String getArticles(Model model)
+    public ResponseEntity<Collection<ArticleDto>> getArticles()
     {
-        model.addAttribute("articles", articleService.getArticles());
-        return "articles";
+        return ResponseEntity.ok(articleService.getArticles());
     }
 
     @GetMapping("/{id}")
-    public String getArticle(@PathVariable Long id, Model model)
+    public ResponseEntity<ArticleDto> getArticle(@PathVariable Long id)
     {
-        model.addAttribute("article", articleService.getArticle(id));
-        return "article";
-    }
-
-    @GetMapping("/add_article")
-    public String saveArticle()
-    {
-        return "add_article";
+        return ResponseEntity.ok(articleService.getArticle(id));
     }
 
     @PostMapping("/add_article")
-    public String saveArticle(@RequestBody ArticleDto articleDto)
+    public ResponseEntity saveArticle(@RequestBody ArticleDto articleDto)
     {
         articleService.saveArticle(articleDto);
-        return "redirect:/";
+        return ResponseEntity.ok().body(SAVE_ARTICLE);
     }
 }

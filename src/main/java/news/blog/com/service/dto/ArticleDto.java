@@ -1,4 +1,4 @@
-package news.blog.com.model.dto;
+package news.blog.com.service.dto;
 
 import lombok.Data;
 
