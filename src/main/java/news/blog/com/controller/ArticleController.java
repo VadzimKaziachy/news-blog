@@ -1,17 +1,20 @@
 package news.blog.com.controller;
 
+import lombok.RequiredArgsConstructor;
+
+import news.blog.com.model.dto.ArticleDto;
 import news.blog.com.service.impl.ArticleServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
 
 @Controller
 @RequestMapping("/")
+@RequiredArgsConstructor
 public class ArticleController
 {
-    @Autowired
-    private ArticleServiceImpl articleService;
+    private final ArticleServiceImpl articleService;
 
     @GetMapping
     public String getArticles(Model model)
@@ -34,14 +37,9 @@ public class ArticleController
     }
 
     @PostMapping("/add_article")
-    public String saveArticle(
-            @RequestParam String tags,
-            @RequestParam String title,
-            @RequestParam String imageName,
-            @RequestParam String fullDescription,
-            @RequestParam String shortDescription)
+    public String saveArticle(@RequestBody ArticleDto articleDto)
     {
-        articleService.saveArticle(tags, title, imageName, fullDescription, shortDescription);
+        articleService.saveArticle(articleDto);
         return "redirect:/";
     }
 }
