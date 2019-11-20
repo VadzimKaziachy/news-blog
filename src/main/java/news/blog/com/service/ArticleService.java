@@ -1,7 +1,6 @@
 package news.blog.com.service;
 
-import news.blog.com.model.ArticleEntity;
-import news.blog.com.model.dto.ArticleDto;
+import news.blog.com.service.dto.ArticleDto;
 
 public interface ArticleService
 {
