@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 
 import java.util.Collection;
 
-import static news.blog.com.util.Constants.SAVE_ARTICLE;
 
 @Controller
 @RequestMapping("/")
@@ -36,6 +35,6 @@ public class ArticleController
     public ResponseEntity saveArticle(@RequestBody ArticleDto articleDto)
     {
         articleService.saveArticle(articleDto);
-        return ResponseEntity.ok().body(SAVE_ARTICLE);
+        return ResponseEntity.ok().build();
     }
 }

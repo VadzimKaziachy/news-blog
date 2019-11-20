@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 
 import javax.persistence.*;
 
-import static news.blog.com.util.Constants.*;
 
 @Data
 @Entity
@@ -20,16 +19,16 @@ public class ArticleEntity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = ARTICLE_ID, nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = ARTICLE_TAGS)
+    @Column(name = "tags")
     private String tags;
-    @Column(name = ARTICLE_TITLE)
+    @Column(name = "title")
     private String title;
-    @Column(name = ARTICLE_IMAGE_NAME)
+    @Column(name = "image_name")
     private String imageName;
-    @Column(name = ARTICLE_FULL_DESCRIPTION)
+    @Column(name = "full_description")
     private String fullDescription;
-    @Column(name = ARTICLE_SHORT_DESCRIPTION)
+    @Column(name = "short_description")
     private String shortDescription;
 }

@@ -1,6 +1,5 @@
 package news.blog.com.service.impl;
 
-import news.blog.com.exception.BadRequestException;
 import news.blog.com.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,6 @@ import com.tabasoft.converter.api.ExtendedConversionService;
 
 import java.util.Collection;
 
-import static news.blog.com.util.Constants.ARTICLE_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +30,7 @@ public class ArticleServiceImpl implements ArticleService
     @Override
     public ArticleDto getArticle(Long id)
     {
-        return conversionService.convert(articleRepository.findById(id).orElseThrow(()-> new NotFoundException(ARTICLE_NOT_FOUND)), ArticleDto.class);
+        return conversionService.convert(articleRepository.findById(id).orElseThrow(()-> new NotFoundException("Article not found")), ArticleDto.class);
     }
 
     @Override
