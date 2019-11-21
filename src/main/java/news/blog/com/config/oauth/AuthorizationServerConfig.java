@@ -1,7 +1,8 @@
 package news.blog.com.config.oauth;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
+
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -21,22 +22,17 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 @Configuration
+@AllArgsConstructor
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter
 {
     private final Logger logger = LoggerFactory.getLogger(AuthorizationServerConfig.class);
 
-    @Resource(name = "authenticationManagerBean")
-    private AuthenticationManager authenticationManager;
+    private final DataSource dataSource;
+    private final PasswordEncoder passwordEncoder;
+    private final UserDetailsService userDetailsService;
+    private final AuthenticationManager authenticationManager;
 
-    @Resource(name = "dataSource")
-    private DataSource dataSource;
-
-    @Resource(name = "userDetailsService")
-    private UserDetailsService userDetailsService;
-
-    @Resource(name = "passwordEncoder")
-    private PasswordEncoder passwordEncoder;
 
     @Bean
     @Primary

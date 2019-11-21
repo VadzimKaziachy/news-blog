@@ -1,5 +1,6 @@
 package news.blog.com.config.oauth;
 
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
@@ -12,13 +13,13 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import javax.annotation.Resource;
 
 @Configuration
+@AllArgsConstructor
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter
 {
     private final Logger logger = LoggerFactory.getLogger(ResourceServerConfig.class);
 
-    @Resource(name = "tokenStore")
-    private TokenStore tokenStore;
+    private final TokenStore tokenStore;
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources)
