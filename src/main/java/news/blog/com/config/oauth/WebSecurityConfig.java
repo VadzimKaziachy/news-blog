@@ -1,6 +1,8 @@
 package news.blog.com.config.oauth;
 
 import javax.annotation.Resource;
+
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -19,16 +21,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 {
     private final Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
 
-    @Resource(name = "passwordEncoder")
-    private PasswordEncoder passwordEncoder;
-
-    @Resource(name = "userDetailsService")
-    private UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
+    private final UserDetailsService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)

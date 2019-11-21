@@ -1,5 +1,6 @@
 package news.blog.com.service.dto;
 
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,15 +10,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@AllArgsConstructor
 public class BlogUserDetails implements UserDetails, Serializable
 {
     private static final long serialVersionUID = 914755272153428L;
 
     private UserDto user;
-
-    public BlogUserDetails(UserDto user) {
-        this.user = user;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()
