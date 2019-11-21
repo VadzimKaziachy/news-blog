@@ -6,4 +6,8 @@
 
     <include file="migrations/article/init-table.xml"/>
 
+    <include file="migrations/user/init-table.xml"/>
+
+    <include file="migrations/oauth/init-table.xml"/>
+
 </databaseChangeLog>
