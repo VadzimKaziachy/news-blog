@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "article", schema = "public")
+@Table(name = "article", schema = "articles")
 public class ArticleEntity
 {
     @Id
