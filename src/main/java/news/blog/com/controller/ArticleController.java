@@ -13,13 +13,13 @@ import java.util.Collection;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/article")
 @RequiredArgsConstructor
 public class ArticleController
 {
     private final ArticleServiceImpl articleService;
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<Collection<ArticleDto>> getArticles()
     {
         return ResponseEntity.ok(articleService.getArticles());

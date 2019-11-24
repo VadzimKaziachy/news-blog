@@ -10,4 +10,6 @@
 
     <include file="migrations/article/init-table.xml"/>
 
+    <include file="migrations/home/init-table.xml"/>
+
 </databaseChangeLog>
