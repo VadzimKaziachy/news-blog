@@ -1,6 +1,7 @@
 package news.blog.com.service.impl;
 
 import news.blog.com.exception.NotFoundException;
+import news.blog.com.model.UserEntity;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,14 @@ public class ArticleServiceImpl implements ArticleService
     @Override
     public Collection<ArticleDto> getArticles()
     {
-        return conversionService.convertMany((Collection) articleRepository.findAll(), ArticleDto.class);
+        return conversionService.convertMany(articleRepository.findAll(), ArticleDto.class);
+    }
+
+    @Override
+    public Collection<ArticleDto> getArticlesByUser()
+    {
+        UserEntity user = securityService.getUserEntity();
+        return conversionService.convertMany(articleRepository.findArticleEntitiesByUser(user), ArticleDto.class);
     }
 
     @Override

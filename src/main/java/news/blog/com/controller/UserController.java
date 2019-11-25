@@ -3,10 +3,12 @@ package news.blog.com.controller;
 import lombok.AllArgsConstructor;
 
 import news.blog.com.service.UserService;
+import news.blog.com.service.dto.ArticleDto;
 import news.blog.com.service.dto.UserDto;
 import news.blog.com.service.RegistrationService;
 
 import news.blog.com.service.dto.responseDto.UserProfileDto;
+import news.blog.com.service.impl.ArticleServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,7 @@ public class UserController
 {
 
     private final UserService userService;
+    private final ArticleServiceImpl articleService;
     private final RegistrationService registrationService;
 
     @GetMapping
@@ -36,6 +39,12 @@ public class UserController
     {
         userService.saveUser(user);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/articles")
+    public ResponseEntity<Collection<ArticleDto>> getArticle()
+    {
+        return ResponseEntity.ok().body(articleService.getArticlesByUser());
     }
 
     @GetMapping("/profile")
