@@ -13,11 +13,11 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user", schema = "public")
+@Table(name = "user", schema = "users")
 public class UserEntity
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     @Column(name = "login", nullable = false)
@@ -27,6 +27,8 @@ public class UserEntity
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "first_name")
+    private String firstName;
 }

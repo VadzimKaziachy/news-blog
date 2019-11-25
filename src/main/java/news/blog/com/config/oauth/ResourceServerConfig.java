@@ -10,8 +10,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
-import javax.annotation.Resource;
-
 @Configuration
 @AllArgsConstructor
 @EnableResourceServer
@@ -34,7 +32,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
         {
             http
                     .authorizeRequests()
-//                    .antMatchers("/").permitAll()
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/user/registration").permitAll()
                     .antMatchers("/auth/**").permitAll()
                     .anyRequest().hasAnyRole("USER", "ADMIN");
         }

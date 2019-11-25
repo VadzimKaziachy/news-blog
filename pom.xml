@@ -45,6 +45,8 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!-- Converter -->
         <dependency>
             <groupId>com.tabasoft</groupId>
             <artifactId>converter</artifactId>
@@ -68,6 +70,7 @@
             <artifactId>liquibase-core</artifactId>
         </dependency>
 
+        <!-- Auth -->
         <dependency>
             <groupId>org.springframework.security.oauth</groupId>
             <artifactId>spring-security-oauth2</artifactId>
