@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Collection;
+
 @Controller
 @AllArgsConstructor
 @RequestMapping("/user")
@@ -40,5 +42,11 @@ public class UserController
     public ResponseEntity<UserProfileDto> registration(@RequestBody UserDto user)
     {
         return ResponseEntity.ok().body(registrationService.registrationUser(user));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<Collection<UserProfileDto>> getUsersProfile()
+    {
+        return ResponseEntity.ok().body(userService.getUsersProfile());
     }
 }

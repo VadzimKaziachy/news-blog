@@ -31,7 +31,7 @@ public class ArticleController
         return ResponseEntity.ok(articleService.getArticle(id));
     }
 
-    @PostMapping("/add_article")
+    @PostMapping("/save")
     public ResponseEntity saveArticle(@RequestBody ArticleDto articleDto)
     {
         articleService.saveArticle(articleDto);
