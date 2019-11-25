@@ -18,7 +18,7 @@ import java.util.Collection;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController
 {
 
@@ -26,27 +26,27 @@ public class UserController
     private final RegistrationService registrationService;
 
     @GetMapping
-    public ResponseEntity<UserProfileDto> getUserProfile()
+    public ResponseEntity<Collection<UserProfileDto>> getUsersProfile()
     {
-        return ResponseEntity.ok().body(userService.getUserProfile());
+        return ResponseEntity.ok().body(userService.getUsersProfile());
     }
 
-    @PostMapping("/save")
+    @PostMapping()
     public ResponseEntity saveUserProfile(@RequestBody UserDto user)
     {
         userService.saveUser(user);
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/profile")
+    public ResponseEntity<UserProfileDto> getUserProfile()
+    {
+        return ResponseEntity.ok().body(userService.getUserProfile());
+    }
+
     @PostMapping("/registration")
     public ResponseEntity<UserProfileDto> registration(@RequestBody UserDto user)
     {
         return ResponseEntity.ok().body(registrationService.registrationUser(user));
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity<Collection<UserProfileDto>> getUsersProfile()
-    {
-        return ResponseEntity.ok().body(userService.getUsersProfile());
     }
 }

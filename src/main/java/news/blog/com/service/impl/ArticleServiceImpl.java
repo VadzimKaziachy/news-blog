@@ -19,6 +19,7 @@ import java.util.Collection;
 public class ArticleServiceImpl implements ArticleService
 {
     private final ArticleRepository articleRepository;
+    private final SecurityServiceImpl securityService;
     private final ExtendedConversionService conversionService;
 
     @Override
@@ -42,6 +43,7 @@ public class ArticleServiceImpl implements ArticleService
                                             .imageName(articleDto.getImageName())
                                             .fullDescription(articleDto.getFullDescription())
                                             .shortDescription(articleDto.getShortDescription())
+                                            .user(securityService.getUserEntity())
                                             .build()
         );
     }

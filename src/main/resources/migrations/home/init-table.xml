@@ -7,7 +7,7 @@
 
         <sql endDelimiter=";">CREATE SCHEMA home</sql>
 
-        <createTable tableName="home" schemaName="public">
+        <createTable tableName="home" schemaName="home">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>

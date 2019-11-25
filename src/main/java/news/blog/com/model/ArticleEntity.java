@@ -31,4 +31,7 @@ public class ArticleEntity
     private String fullDescription;
     @Column(name = "short_description")
     private String shortDescription;
+    @OneToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_user_id", nullable = false)
+    private UserEntity user;
 }

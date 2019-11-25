@@ -13,28 +13,28 @@ import java.util.Collection;
 
 
 @Controller
-@RequestMapping("/article")
+@RequestMapping("/articles")
 @RequiredArgsConstructor
 public class ArticleController
 {
     private final ArticleServiceImpl articleService;
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<Collection<ArticleDto>> getArticles()
     {
         return ResponseEntity.ok(articleService.getArticles());
+    }
+
+    @PostMapping
+    public ResponseEntity saveArticle(@RequestBody ArticleDto articleDto)
+    {
+        articleService.saveArticle(articleDto);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ArticleDto> getArticle(@PathVariable Long id)
     {
         return ResponseEntity.ok(articleService.getArticle(id));
-    }
-
-    @PostMapping("/save")
-    public ResponseEntity saveArticle(@RequestBody ArticleDto articleDto)
-    {
-        articleService.saveArticle(articleDto);
-        return ResponseEntity.ok().build();
     }
 }

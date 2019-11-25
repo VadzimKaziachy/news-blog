@@ -23,7 +23,7 @@ public class HomeController
         return ResponseEntity.ok().body(homeService.getHome());
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity saveHome(@RequestBody HomeDto homeDto)
     {
         homeService.saveHome(homeDto);
