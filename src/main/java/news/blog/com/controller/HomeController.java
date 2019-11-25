@@ -1,6 +1,7 @@
 package news.blog.com.controller;
 
 import lombok.RequiredArgsConstructor;
+import news.blog.com.service.HomeService;
 import news.blog.com.service.dto.HomeDto;
 import news.blog.com.service.impl.HomeServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class HomeController
 {
-    private final HomeServiceImpl homeService;
+    private final HomeService homeService;
 
     @GetMapping
     public ResponseEntity<HomeDto> getHome()

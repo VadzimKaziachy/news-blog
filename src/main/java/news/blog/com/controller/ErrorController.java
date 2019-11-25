@@ -3,6 +3,7 @@ package news.blog.com.controller;
 import news.blog.com.exception.BadRequestException;
 import news.blog.com.exception.ForbiddenException;
 import news.blog.com.exception.NotFoundException;
+import news.blog.com.exception.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -39,5 +40,13 @@ public class ErrorController
     {
         logger.error("Error while running application", throwable);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(throwable.getMessage());
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ResponseEntity unauthorizedException(final UnauthorizedException throwable)
+    {
+        logger.error("Error while running application", throwable);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(throwable.getMessage());
     }
 }

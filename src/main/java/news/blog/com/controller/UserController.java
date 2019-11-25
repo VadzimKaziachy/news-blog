@@ -2,6 +2,7 @@ package news.blog.com.controller;
 
 import lombok.AllArgsConstructor;
 
+import news.blog.com.service.ArticleService;
 import news.blog.com.service.UserService;
 import news.blog.com.service.dto.ArticleDto;
 import news.blog.com.service.dto.UserDto;
@@ -25,7 +26,7 @@ public class UserController
 {
 
     private final UserService userService;
-    private final ArticleServiceImpl articleService;
+    private final ArticleService articleService;
     private final RegistrationService registrationService;
 
     @GetMapping
