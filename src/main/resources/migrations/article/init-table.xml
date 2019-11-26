@@ -7,7 +7,7 @@
 
         <sql endDelimiter=";">CREATE SCHEMA articles</sql>
 
-        <createTable tableName="article" schemaName="public">
+        <createTable tableName="article" schemaName="articles">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
@@ -16,7 +16,19 @@
             <column name="image_name" type="varchar"/>
             <column name="full_description" type="varchar"/>
             <column name="short_description" type="varchar"/>
+            <column name="fk_user_id" type="bigint"/>
         </createTable>
+
+        <addForeignKeyConstraint baseTableName="article"
+                                 baseColumnNames="fk_user_id"
+                                 baseTableSchemaName="articles"
+
+                                 onDelete="CASCADE"
+                                 constraintName="fk-user-id"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"
+                                 referencedTableSchemaName="users"
+        />
 
     </changeSet>
 </databaseChangeLog>
