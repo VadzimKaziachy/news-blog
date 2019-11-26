@@ -1,6 +1,5 @@
 package news.blog.com.service.impl;
 
-import lombok.AllArgsConstructor;
 import news.blog.com.exception.ForbiddenException;
 import news.blog.com.service.ContextService;
 import news.blog.com.service.CurrentUserProvider;
