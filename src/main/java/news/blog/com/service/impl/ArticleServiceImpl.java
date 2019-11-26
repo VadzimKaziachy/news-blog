@@ -2,6 +2,7 @@ package news.blog.com.service.impl;
 
 import news.blog.com.exception.NotFoundException;
 import news.blog.com.model.UserEntity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -24,16 +25,16 @@ public class ArticleServiceImpl implements ArticleService
     private final ExtendedConversionService conversionService;
 
     @Override
-    public Collection<ArticleDto> getArticles()
+    public Collection<ArticleDto> getArticles(Pageable pageable)
     {
-        return conversionService.convertMany(articleRepository.findAll(), ArticleDto.class);
+        return conversionService.convertMany(articleRepository.findAll(pageable).getContent(), ArticleDto.class);
     }
 
     @Override
-    public Collection<ArticleDto> getArticlesByUser()
+    public Collection<ArticleDto> getArticlesByUser(Pageable pageable)
     {
         UserEntity user = securityService.getUserEntity();
-        return conversionService.convertMany(articleRepository.findArticleEntitiesByUser(user), ArticleDto.class);
+        return conversionService.convertMany(articleRepository.findArticleEntitiesByUser(user, pageable).getContent(), ArticleDto.class);
     }
 
     @Override

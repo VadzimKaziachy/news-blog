@@ -2,6 +2,8 @@ package news.blog.com.repository;
 
 import news.blog.com.model.ArticleEntity;
 import news.blog.com.model.UserEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -11,7 +13,7 @@ public interface ArticleRepository extends CrudRepository<ArticleEntity, Long>
 {
     Optional<ArticleEntity> findById(Long id);
 
-    List<ArticleEntity> findAll();
+    Page<ArticleEntity> findAll(Pageable pageable);
 
-    List<ArticleEntity> findArticleEntitiesByUser(UserEntity user);
+    Page<ArticleEntity> findArticleEntitiesByUser(UserEntity user, Pageable pageable);
 }

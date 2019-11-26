@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 import news.blog.com.service.ArticleService;
 import news.blog.com.service.dto.ArticleDto;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
@@ -20,9 +23,10 @@ public class ArticleController
     private final ArticleService articleService;
 
     @GetMapping
-    public ResponseEntity<Collection<ArticleDto>> getArticles()
+    public ResponseEntity<Collection<ArticleDto>> getArticles(
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable)
     {
-        return ResponseEntity.ok(articleService.getArticles());
+        return ResponseEntity.ok(articleService.getArticles(pageable));
     }
 
     @PostMapping

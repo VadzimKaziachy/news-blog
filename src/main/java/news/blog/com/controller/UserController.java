@@ -10,6 +10,9 @@ import news.blog.com.service.RegistrationService;
 
 import news.blog.com.service.dto.responseDto.UserProfileDto;
 import news.blog.com.service.impl.ArticleServiceImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,9 +46,10 @@ public class UserController
     }
 
     @GetMapping("/articles")
-    public ResponseEntity<Collection<ArticleDto>> getArticle()
+    public ResponseEntity<Collection<ArticleDto>> getArticle(
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable)
     {
-        return ResponseEntity.ok().body(articleService.getArticlesByUser());
+        return ResponseEntity.ok().body(articleService.getArticlesByUser(pageable));
     }
 
     @GetMapping("/profile")
