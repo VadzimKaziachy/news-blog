@@ -1,6 +1,6 @@
 # API
 
-[Русский](../ru/README.md) | **English**
+[Русский](../ru/API.md) | **English**
 
 This tutorial will describe how the API works.
 
