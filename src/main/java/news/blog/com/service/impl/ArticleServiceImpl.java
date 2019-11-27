@@ -54,7 +54,8 @@ public class ArticleServiceImpl implements ArticleService
                    articleTags.add(ArticleTagsResponseDto.builder()
                                                          .tag(tag)
                                                          .quantity(quantity)
-                                                         .build());
+                                                         .build()
+                   );
                 }
 
         );
