@@ -11,6 +11,10 @@ import java.util.Optional;
 
 public interface ArticleRepository extends CrudRepository<ArticleEntity, Long>
 {
+    List<ArticleEntity> findAll();
+
+    List<ArticleEntity> findByTag(String string);
+
     Optional<ArticleEntity> findById(Long id);
 
     Page<ArticleEntity> findAll(Pageable pageable);

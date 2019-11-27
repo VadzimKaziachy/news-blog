@@ -18,6 +18,8 @@
   - GET
     - /articles
     - /articles/{id}
+    - /articles/tags
+    - /articles/tags/{tag}
   - POST
     - /articles
 - [users](#users)
@@ -122,6 +124,50 @@ Body -> from-data:
     "fullDescription": "fullDescription",
     "shortDescription": "shortDescription"
 }
+```
+
+#### /articles/tags
+```json
+[
+    {
+        "tag": "tag",
+        "quantity": 2
+    },
+    {
+        "tag": "tag1",
+        "quantity": 2
+    },
+    {
+        "tag": "tag2",
+        "quantity": 1
+    },
+    {
+        "tag": "tag3",
+        "quantity": 1
+    }
+]
+```
+
+#### /articles/tags/{tag}
+```json
+[
+    {
+        "id": 1,
+        "tag": "tag",
+        "title": "title",
+        "imageName": "image",
+        "fullDescription": "fullDescription",
+        "shortDescription": "shortDescription"
+    },
+    {
+        "id": 3,
+        "tag": "tag",
+        "title": "title2",
+        "imageName": "image",
+        "fullDescription": "fullDescription",
+        "shortDescription": "shortDescription"
+    }
+]
 ```
 
 ### POST

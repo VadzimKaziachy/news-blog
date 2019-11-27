@@ -11,7 +11,7 @@ import news.blog.com.repository.UserRepository;
 import news.blog.com.service.dto.UserDto;
 import news.blog.com.service.RegistrationService;
 
-import news.blog.com.service.dto.responseDto.UserProfileDto;
+import news.blog.com.service.dto.response.UserProfileResponseDto;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -42,7 +42,7 @@ public class RegistrationServiceImpl implements RegistrationService
 
     @Override
     @Transactional
-    public UserProfileDto registrationUser(UserDto userDto)
+    public UserProfileResponseDto registrationUser(UserDto userDto)
     {
 
         if (userRepository.existsByLogin(userDto.getLogin()))
@@ -56,7 +56,7 @@ public class RegistrationServiceImpl implements RegistrationService
                                                          .role(UserRole.USER)
                                                          .build()
         );
-        UserProfileDto profileUserDto  = conversionService.convert(user, UserProfileDto.class);
+        UserProfileResponseDto profileUserDto  = conversionService.convert(user, UserProfileResponseDto.class);
         OAuth2AccessToken accessToken = getAccessToken(user.getLogin(), "web");
 
         profileUserDto.setAccessToken(accessToken.getValue());

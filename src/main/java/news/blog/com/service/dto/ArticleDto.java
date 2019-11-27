@@ -6,7 +6,7 @@ import lombok.Data;
 public class ArticleDto
 {
     private Long id;
-    private String tags;
+    private String tag;
     private String title;
     private String imageName;
     private String fullDescription;

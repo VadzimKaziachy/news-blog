@@ -2,6 +2,7 @@ package news.blog.com.service.impl;
 
 import news.blog.com.exception.NotFoundException;
 import news.blog.com.model.UserEntity;
+import news.blog.com.service.dto.response.ArticleTagsResponseDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,8 @@ import news.blog.com.repository.ArticleRepository;
 
 import com.tabasoft.converter.api.ExtendedConversionService;
 
-import java.util.Collection;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -38,6 +40,33 @@ public class ArticleServiceImpl implements ArticleService
     }
 
     @Override
+    public Collection<ArticleTagsResponseDto> getArticleTags() {
+        Collection<ArticleTagsResponseDto> articleTags = new ArrayList<>();
+        Collection<ArticleEntity> articles = articleRepository.findAll();
+        Set<String> tags = articles.stream()
+                                   .map(ArticleEntity::getTag)
+                                   .collect(Collectors.toSet());
+        tags.forEach(tag ->
+                {
+                   Long quantity = articles.stream()
+                                           .filter(article -> article.getTag().equals(tag))
+                                           .count();
+                   articleTags.add(ArticleTagsResponseDto.builder()
+                                                         .tag(tag)
+                                                         .quantity(quantity)
+                                                         .build());
+                }
+
+        );
+        return articleTags.stream().sorted(Comparator.comparing(ArticleTagsResponseDto::getTag)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<ArticleDto> getArticleByTag(String tag) {
+        return conversionService.convertMany(articleRepository.findByTag(tag), ArticleDto.class);
+    }
+
+    @Override
     public ArticleDto getArticle(Long id)
     {
         return conversionService.convert(articleRepository.findById(id).orElseThrow(()-> new NotFoundException("Article not found")), ArticleDto.class);
@@ -47,7 +76,7 @@ public class ArticleServiceImpl implements ArticleService
     public void saveArticle(ArticleDto articleDto)
     {
         articleRepository.save(ArticleEntity.builder()
-                                            .tags(articleDto.getTags())
+                                            .tag(articleDto.getTag())
                                             .title(articleDto.getTitle())
                                             .imageName(articleDto.getImageName())
                                             .fullDescription(articleDto.getFullDescription())

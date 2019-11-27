@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import news.blog.com.service.ArticleService;
 import news.blog.com.service.dto.ArticleDto;
 
+import news.blog.com.service.dto.response.ArticleTagsResponseDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -40,5 +41,17 @@ public class ArticleController
     public ResponseEntity<ArticleDto> getArticle(@PathVariable Long id)
     {
         return ResponseEntity.ok(articleService.getArticle(id));
+    }
+
+    @GetMapping("/tags")
+    public ResponseEntity<Collection<ArticleTagsResponseDto>> getTags()
+    {
+        return ResponseEntity.ok(articleService.getArticleTags());
+    }
+
+    @GetMapping("/tags/{tag}")
+    public ResponseEntity<Collection<ArticleDto>> getArticleByTag(@PathVariable String tag)
+    {
+        return ResponseEntity.ok(articleService.getArticleByTag(tag));
     }
 }
