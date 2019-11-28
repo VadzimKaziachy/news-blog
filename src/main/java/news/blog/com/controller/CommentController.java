@@ -14,14 +14,14 @@ public class CommentController
 {
     private final CommentService commentService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity getCommentsByArticle(@PathVariable Long id)
+    @GetMapping
+    public ResponseEntity getCommentsByArticle(@RequestParam Long id)
     {
         return ResponseEntity.ok(commentService.getCommentsByArticle(id));
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity saveCommentsByArticle(@RequestBody CommentDto commentDto, @PathVariable Long id)
+    @PostMapping
+    public ResponseEntity saveCommentsByArticle(@RequestBody CommentDto commentDto, @RequestParam Long id)
     {
         commentService.saveCommentsByArticle(commentDto, id);
         return ResponseEntity.ok().build();

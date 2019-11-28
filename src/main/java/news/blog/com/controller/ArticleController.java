@@ -37,8 +37,8 @@ public class ArticleController
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ArticleDto> getArticle(@PathVariable Long id)
+    @GetMapping("/article")
+    public ResponseEntity<ArticleDto> getArticle(@RequestParam Long id)
     {
         return ResponseEntity.ok(articleService.getArticle(id));
     }
@@ -49,8 +49,8 @@ public class ArticleController
         return ResponseEntity.ok(articleService.getArticleTags());
     }
 
-    @GetMapping("/tags/{tag}")
-    public ResponseEntity<Collection<ArticleDto>> getArticleByTag(@PathVariable String tag)
+    @GetMapping("/tag")
+    public ResponseEntity<Collection<ArticleDto>> getArticleByTag(@RequestParam String tag)
     {
         return ResponseEntity.ok(articleService.getArticleByTag(tag));
     }

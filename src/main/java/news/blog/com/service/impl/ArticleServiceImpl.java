@@ -42,24 +42,17 @@ public class ArticleServiceImpl implements ArticleService
     @Override
     public Collection<ArticleTagsResponseDto> getArticleTags() {
         Collection<ArticleTagsResponseDto> articleTags = new ArrayList<>();
-        Collection<ArticleEntity> articles = articleRepository.findAll();
-        Set<String> tags = articles.stream()
-                                   .map(ArticleEntity::getTag)
-                                   .collect(Collectors.toSet());
-        tags.forEach(tag ->
-                {
-                   Long quantity = articles.stream()
-                                           .filter(article -> article.getTag().equals(tag))
-                                           .count();
-                   articleTags.add(ArticleTagsResponseDto.builder()
-                                                         .tag(tag)
-                                                         .quantity(quantity)
-                                                         .build()
-                   );
-                }
 
-        );
-        return articleTags.stream().sorted(Comparator.comparing(ArticleTagsResponseDto::getTag)).collect(Collectors.toList());
+        Set<String> tags = articleRepository.findAllTags();
+        tags.forEach(tag -> {
+            articleTags.add(ArticleTagsResponseDto.builder()
+                                                  .tag(tag)
+                                                  .quantity(articleRepository.findAmountArticleByTag(tag))
+                                                  .build()
+            );
+        });
+
+        return articleTags;
     }
 
     @Override

@@ -24,7 +24,7 @@ public class CommentServiceImpl implements CommentService
     @Override
     public Collection<CommentDto> getCommentsByArticle(Long id)
     {
-        return conversionService.convertMany(commentRepository.findByArticle_Id(id), CommentDto.class);
+        return conversionService.convertMany(commentRepository.findByArticleId(id), CommentDto.class);
     }
 
     @Override

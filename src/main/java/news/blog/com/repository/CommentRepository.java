@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CommentRepository extends CrudRepository<CommentEntity, Long>
 {
-    List<CommentEntity> findByArticle_Id(Long id);
+    List<CommentEntity> findByArticleId(Long id);
 }
