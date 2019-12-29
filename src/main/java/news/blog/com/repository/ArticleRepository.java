@@ -18,7 +18,7 @@ public interface ArticleRepository extends CrudRepository<ArticleEntity, Long>
 
     List<ArticleEntity> findByTag(String string);
 
-    @Query(value = "SELECT tag FROM ArticleEntity ORDER BY tag ASC")
+    @Query(value = "SELECT DISTINCT tag FROM ArticleEntity ORDER BY tag ASC")
     Set<String> findAllTags();
 
     @Query(value = "SELECT COUNT(article) FROM ArticleEntity article WHERE article.tag = :tag")
