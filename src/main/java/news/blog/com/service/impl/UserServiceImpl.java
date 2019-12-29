@@ -1,19 +1,20 @@
 package news.blog.com.service.impl;
 
-import com.tabasoft.converter.api.ExtendedConversionService;
-import news.blog.com.exception.UnauthorizedException;
 import news.blog.com.model.UserEntity;
-import news.blog.com.model.type.UserRole;
-import news.blog.com.repository.UserRepository;
-import news.blog.com.service.ContextService;
-import news.blog.com.service.CurrentUserProvider;
-import news.blog.com.service.SecurityService;
-import news.blog.com.service.UserService;
 import news.blog.com.service.dto.UserDto;
+import news.blog.com.service.UserService;
+import news.blog.com.model.type.UserRole;
+import news.blog.com.service.SecurityService;
+import news.blog.com.repository.UserRepository;
+import news.blog.com.service.CurrentUserProvider;
+import news.blog.com.exception.UnauthorizedException;
+import com.tabasoft.converter.api.ExtendedConversionService;
 import news.blog.com.service.dto.response.UserProfileResponseDto;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -22,8 +23,6 @@ public class UserServiceImpl implements UserService, CurrentUserProvider
 {
     @Resource(name = "userRepository")
     private UserRepository userRepository;
-    @Resource(name = "contextService")
-    private ContextService contextService;
     @Resource(name = "securityService")
     private SecurityService securityService;
     @Resource(name = "extendedConversionService")
@@ -47,7 +46,6 @@ public class UserServiceImpl implements UserService, CurrentUserProvider
 
     @Override
     public Collection<UserProfileResponseDto> getUsersProfile() {
-        contextService.assertCurrentUserHasAdminRole();
         return conversionService.convertMany(
                 userRepository.findAll()
                               .stream()
