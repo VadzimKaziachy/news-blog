@@ -8,8 +8,10 @@ import news.blog.com.service.dto.ArticleDto;
 import news.blog.com.service.dto.UserDto;
 import news.blog.com.service.RegistrationService;
 
-import news.blog.com.service.dto.responseDto.UserProfileDto;
-import news.blog.com.service.impl.ArticleServiceImpl;
+import news.blog.com.service.dto.response.UserProfileResponseDto;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +32,7 @@ public class UserController
     private final RegistrationService registrationService;
 
     @GetMapping
-    public ResponseEntity<Collection<UserProfileDto>> getUsersProfile()
+    public ResponseEntity<Collection<UserProfileResponseDto>> getUsersProfile()
     {
         return ResponseEntity.ok().body(userService.getUsersProfile());
     }
@@ -43,19 +45,20 @@ public class UserController
     }
 
     @GetMapping("/articles")
-    public ResponseEntity<Collection<ArticleDto>> getArticle()
+    public ResponseEntity<Collection<ArticleDto>> getArticle(
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable)
     {
-        return ResponseEntity.ok().body(articleService.getArticlesByUser());
+        return ResponseEntity.ok().body(articleService.getArticlesByUser(pageable));
     }
 
     @GetMapping("/profile")
-    public ResponseEntity<UserProfileDto> getUserProfile()
+    public ResponseEntity<UserProfileResponseDto> getUserProfile()
     {
         return ResponseEntity.ok().body(userService.getUserProfile());
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<UserProfileDto> registration(@RequestBody UserDto user)
+    public ResponseEntity<UserProfileResponseDto> registration(@RequestBody UserDto user)
     {
         return ResponseEntity.ok().body(registrationService.registrationUser(user));
     }

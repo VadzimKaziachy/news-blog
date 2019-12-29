@@ -1,15 +1,15 @@
 package news.blog.com.service;
 
 import news.blog.com.service.dto.UserDto;
-import news.blog.com.service.dto.responseDto.UserProfileDto;
+import news.blog.com.service.dto.response.UserProfileResponseDto;
 
 import java.util.Collection;
 
 public interface UserService
 {
-    UserProfileDto getUserProfile();
+    UserProfileResponseDto getUserProfile();
 
     void saveUser(UserDto user);
 
-    Collection<UserProfileDto> getUsersProfile();
+    Collection<UserProfileResponseDto> getUsersProfile();
 }

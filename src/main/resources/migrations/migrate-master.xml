@@ -12,4 +12,6 @@
 
     <include file="migrations/home/init-table.xml"/>
 
+    <include file="migrations/comment/init-table.xml"/>
+
 </databaseChangeLog>

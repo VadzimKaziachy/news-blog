@@ -21,8 +21,8 @@ public class ArticleEntity
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "tags")
-    private String tags;
+    @Column(name = "tag")
+    private String tag;
     @Column(name = "title")
     private String title;
     @Column(name = "image_name")

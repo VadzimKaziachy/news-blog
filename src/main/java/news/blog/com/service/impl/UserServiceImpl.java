@@ -1,7 +1,6 @@
 package news.blog.com.service.impl;
 
 import com.tabasoft.converter.api.ExtendedConversionService;
-import lombok.AllArgsConstructor;
 import news.blog.com.exception.UnauthorizedException;
 import news.blog.com.model.UserEntity;
 import news.blog.com.model.type.UserRole;
@@ -11,7 +10,7 @@ import news.blog.com.service.CurrentUserProvider;
 import news.blog.com.service.SecurityService;
 import news.blog.com.service.UserService;
 import news.blog.com.service.dto.UserDto;
-import news.blog.com.service.dto.responseDto.UserProfileDto;
+import news.blog.com.service.dto.response.UserProfileResponseDto;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,10 +30,10 @@ public class UserServiceImpl implements UserService, CurrentUserProvider
     private ExtendedConversionService conversionService;
 
     @Override
-    public UserProfileDto getUserProfile()
+    public UserProfileResponseDto getUserProfile()
     {
         UserEntity userEntity = securityService.getUserEntity();
-        return conversionService.convert(userEntity, UserProfileDto.class);
+        return conversionService.convert(userEntity, UserProfileResponseDto.class);
     }
 
     @Override
@@ -47,14 +46,14 @@ public class UserServiceImpl implements UserService, CurrentUserProvider
     }
 
     @Override
-    public Collection<UserProfileDto> getUsersProfile() {
+    public Collection<UserProfileResponseDto> getUsersProfile() {
         contextService.assertCurrentUserHasAdminRole();
         return conversionService.convertMany(
                 userRepository.findAll()
                               .stream()
                               .filter(user -> user.getRole().equals(UserRole.USER))
                               .collect(Collectors.toList()),
-                UserProfileDto.class);
+                UserProfileResponseDto.class);
     }
 
     @Override

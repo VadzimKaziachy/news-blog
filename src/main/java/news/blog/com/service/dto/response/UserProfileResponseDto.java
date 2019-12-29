@@ -1,10 +1,10 @@
-package news.blog.com.service.dto.responseDto;
+package news.blog.com.service.dto.response;
 
 import lombok.Data;
 import news.blog.com.model.type.UserRole;
 
 @Data
-public class UserProfileDto
+public class UserProfileResponseDto
 {
     private String login;
     private UserRole role;
