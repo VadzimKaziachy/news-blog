@@ -11,6 +11,7 @@ public class UserDto implements Serializable
     private static final long serialVersionUID = 51355998888834302L;
 
     private Long id;
+    private String email;
     private String login;
     private String password;
     private UserRole role;

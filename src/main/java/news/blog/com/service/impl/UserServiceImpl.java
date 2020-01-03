@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService, CurrentUserProvider
         UserEntity userEntity = securityService.getUserEntity();
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
+        userEntity.setEmail(user.getEmail());
         userRepository.save(userEntity);
     }
 
