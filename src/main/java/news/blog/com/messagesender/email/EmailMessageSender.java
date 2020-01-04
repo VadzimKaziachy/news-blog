@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Component;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -94,6 +95,7 @@ public class EmailMessageSender implements MessageSender
     }
 
     @Override
+    @Async
     public void sendLetterUsers(String titleArticle)
     {
         String message = String.format(MESSAGE_ARTICLE, titleArticle);
@@ -102,6 +104,5 @@ public class EmailMessageSender implements MessageSender
         emails.forEach(email -> {
             sendBaseEmail(email, message, NEW_ARTICLE_SUBJECT, NEW_ARTICLE_TEMPLATE);
         });
-
     }
 }

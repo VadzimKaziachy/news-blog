@@ -30,7 +30,6 @@ public class ArticleServiceImpl implements ArticleService
     @Override
     public Collection<ArticleDto> getArticles(Pageable pageable)
     {
-        messageSender.sendLetterUsers("Article 1");
         return conversionService.convertMany(articleRepository.findAll(pageable).getContent(), ArticleDto.class);
     }
 
@@ -80,5 +79,6 @@ public class ArticleServiceImpl implements ArticleService
                                             .user(securityService.getUserEntity())
                                             .build()
         );
+        messageSender.sendLetterUsers(articleDto.getTitle());
     }
 }
