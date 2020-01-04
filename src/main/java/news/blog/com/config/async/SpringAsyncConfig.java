@@ -21,7 +21,7 @@ public class SpringAsyncConfig implements AsyncConfigurer
         executor.setCorePoolSize(2);
         executor.setMaxPoolSize(2);
         executor.setQueueCapacity(500);
-        executor.setThreadNamePrefix("NewsBlog-");
+        executor.setThreadNamePrefix("NewsAsync-");
         executor.initialize();
         return executor;
     }
