@@ -1,5 +1,6 @@
 package news.blog.com.service.impl;
 
+import news.blog.com.annotation.ValidateEmail;
 import news.blog.com.model.UserEntity;
 import news.blog.com.service.dto.UserDto;
 import news.blog.com.service.UserService;
@@ -17,6 +18,8 @@ import javax.annotation.Resource;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
+
+import static news.blog.com.aspect.EmailAspect.USER_DTO_EMAIL;
 
 @Service("userService")
 public class UserServiceImpl implements UserService, CurrentUserProvider
@@ -36,6 +39,7 @@ public class UserServiceImpl implements UserService, CurrentUserProvider
     }
 
     @Override
+    @ValidateEmail(key = USER_DTO_EMAIL)
     public void saveUser(UserDto user)
     {
         UserEntity userEntity = securityService.getUserEntity();
