@@ -4,30 +4,31 @@ import com.tabasoft.converter.api.ExtendedConversionService;
 
 import lombok.AllArgsConstructor;
 
-import news.blog.com.exception.BadRequestException;
 import news.blog.com.model.UserEntity;
 import news.blog.com.model.type.UserRole;
-import news.blog.com.repository.UserRepository;
 import news.blog.com.service.dto.UserDto;
+import news.blog.com.repository.UserRepository;
 import news.blog.com.service.RegistrationService;
+import news.blog.com.exception.BadRequestException;
 
-import news.blog.com.service.dto.response.UserProfileResponseDto;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.GrantedAuthority;
+import news.blog.com.service.dto.response.UserProfileResponseDto;
+import org.springframework.security.oauth2.provider.OAuth2Request;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerEndpointsConfiguration;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.security.oauth2.provider.OAuth2Request;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerEndpointsConfiguration;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Set;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
 
 
 @AllArgsConstructor

@@ -1,29 +1,31 @@
 package news.blog.com.service.impl;
 
-import com.tabasoft.converter.api.ExtendedConversionService;
-import news.blog.com.exception.UnauthorizedException;
+import news.blog.com.annotation.ValidateEmail;
 import news.blog.com.model.UserEntity;
-import news.blog.com.model.type.UserRole;
-import news.blog.com.repository.UserRepository;
-import news.blog.com.service.ContextService;
-import news.blog.com.service.CurrentUserProvider;
-import news.blog.com.service.SecurityService;
-import news.blog.com.service.UserService;
 import news.blog.com.service.dto.UserDto;
+import news.blog.com.service.UserService;
+import news.blog.com.model.type.UserRole;
+import news.blog.com.service.SecurityService;
+import news.blog.com.repository.UserRepository;
+import news.blog.com.service.CurrentUserProvider;
+import news.blog.com.exception.UnauthorizedException;
+import com.tabasoft.converter.api.ExtendedConversionService;
 import news.blog.com.service.dto.response.UserProfileResponseDto;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
 import java.util.Collection;
 import java.util.stream.Collectors;
+
+import static news.blog.com.aspect.EmailAspect.USER_DTO_EMAIL;
 
 @Service("userService")
 public class UserServiceImpl implements UserService, CurrentUserProvider
 {
     @Resource(name = "userRepository")
     private UserRepository userRepository;
-    @Resource(name = "contextService")
-    private ContextService contextService;
     @Resource(name = "securityService")
     private SecurityService securityService;
     @Resource(name = "extendedConversionService")
@@ -37,17 +39,18 @@ public class UserServiceImpl implements UserService, CurrentUserProvider
     }
 
     @Override
+    @ValidateEmail(key = USER_DTO_EMAIL)
     public void saveUser(UserDto user)
     {
         UserEntity userEntity = securityService.getUserEntity();
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
+        userEntity.setEmail(user.getEmail());
         userRepository.save(userEntity);
     }
 
     @Override
     public Collection<UserProfileResponseDto> getUsersProfile() {
-        contextService.assertCurrentUserHasAdminRole();
         return conversionService.convertMany(
                 userRepository.findAll()
                               .stream()

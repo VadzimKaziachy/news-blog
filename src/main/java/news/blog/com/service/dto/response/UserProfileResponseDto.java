@@ -7,6 +7,7 @@ import news.blog.com.model.type.UserRole;
 public class UserProfileResponseDto
 {
     private String login;
+    private String email;
     private UserRole role;
     private String lastName;
     private String firstName;

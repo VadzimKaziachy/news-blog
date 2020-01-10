@@ -1,6 +1,7 @@
 package news.blog.com.service.impl;
 
 import news.blog.com.exception.NotFoundException;
+import news.blog.com.messagesender.MessageSender;
 import news.blog.com.model.UserEntity;
 import news.blog.com.service.dto.response.ArticleTagsResponseDto;
 import org.springframework.data.domain.Pageable;
@@ -15,13 +16,13 @@ import news.blog.com.repository.ArticleRepository;
 import com.tabasoft.converter.api.ExtendedConversionService;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 @Service
 @RequiredArgsConstructor
 public class ArticleServiceImpl implements ArticleService
 {
+    private final MessageSender messageSender;
     private final ArticleRepository articleRepository;
     private final SecurityServiceImpl securityService;
     private final ExtendedConversionService conversionService;
@@ -78,5 +79,6 @@ public class ArticleServiceImpl implements ArticleService
                                             .user(securityService.getUserEntity())
                                             .build()
         );
+        messageSender.sendLetterUsers(articleDto.getTitle());
     }
 }

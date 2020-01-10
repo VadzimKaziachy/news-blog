@@ -24,6 +24,8 @@ public class UserEntity
     private String login;
     @Column(name = "password", nullable = false)
     private String password;
+    @Column(name = "email")
+    private String email;
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;

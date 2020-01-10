@@ -2,6 +2,7 @@ package news.blog.com.controller;
 
 import lombok.AllArgsConstructor;
 
+import news.blog.com.annotation.WithAdminAuthentication;
 import news.blog.com.service.ArticleService;
 import news.blog.com.service.UserService;
 import news.blog.com.service.dto.ArticleDto;
@@ -32,6 +33,7 @@ public class UserController
     private final RegistrationService registrationService;
 
     @GetMapping
+    @WithAdminAuthentication
     public ResponseEntity<Collection<UserProfileResponseDto>> getUsersProfile()
     {
         return ResponseEntity.ok().body(userService.getUsersProfile());
